@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor's Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #3498db;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 1em;
+            background-color: #ecf0f1;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .doctor-profile {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em;
+            border-bottom: 2px solid #3498db;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .doctor-details {
+            flex: 1;
+            padding-left: 1em;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .doctor-profile:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        h2 {
+            color: #3498db;
+        }
+
+        p {
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Doctor's Profile</h1>
+        <label for="specialistSearch">Find Specialist:</label>
+        <input type="text" id="specialistSearch" oninput="searchSpecialist()">
+    </header>
+    <main id="doctorProfiles">
+        
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            displayDoctors(doctorData);
+        });
+
+        function displayDoctors(doctors) {
+            const doctorProfiles = document.getElementById('doctorProfiles');
+            doctorProfiles.innerHTML = '';
+
+            doctors.forEach(doctor => {
+                const doctorProfile = document.createElement('div');
+                doctorProfile.classList.add('doctor-profile');
+                doctorProfile.innerHTML = `
+                    <img src="${doctor.image}" alt="${doctor.name} Image">
+                    <div class="doctor-details">
+                        <h2>${doctor.name}</h2>
+                        <p><strong>Specialization:</strong> ${doctor.specialization}</p>
+                        <p><strong>Experience:</strong> ${doctor.experience} years</p>
+                        <p><strong>Education:</strong> ${doctor.education}</p>
+                        <p><strong>Contact:</strong> ${doctor.email} | ${doctor.phone}</p>
+                        <p><strong>About Me:</strong> ${doctor.about}</p>
+                    </div>
+                `;
+                doctorProfiles.appendChild(doctorProfile);
+            });
+        }
+
+        function searchSpecialist() {
+            const searchTerm = document.getElementById('specialistSearch').value.toLowerCase();
+            const filteredDoctors = doctorData.filter(doctor =>
+                doctor.specialization.toLowerCase().includes(searchTerm)
+            );
+            displayDoctors(filteredDoctors);
+        }
+
+        
+        const doctorData = [
+            {
+                name: 'Prof. Dr. Mohammad Sharifuzzaman',
+                specialization: 'Cardiology Specialist',
+                experience: 15,
+                education: 'MD in Cardiology, University Medical School',
+                email: 'j.smith@example.com',
+                phone: '(555) 123-4567',
+                about: 'Prof. Dr. Mohammad Sharifuzzaman is a highly experienced cardiologist...',
+                image: 'doctor1.jpg'
+            },
+            {
+                name: 'Prof. Dr. M. Quamrul Islam Talukder',
+                specialization: 'CABG both on pump & off pump, Valve repair & replacement . Aortic Sergery. Septal Myectomy. Minimally invassive Cardiac Surgery',
+                experience: 12,
+                education: 'MBBS (DMU), FCPS (Surgery) MD (USA), FCVS (USA), Advance Fellowship in Cardiovascular Surgery (Mayoclinic, USA)',
+                email: 'j.doe@example.com',
+                phone: '(555) 987-6543',
+                about: 'Prof. Dr. M. Quamrul Islam Talukder is a compassionate pediatrician...',
+                image: 'doctor2.jpg'
+            },
+            {
+                name: 'Prof. Dr. Abul Kalm Shamsuddin',
+                specialization: 'Pediatric and Congenital Cardiac Surgery',
+                experience: 13,
+                education: 'MBBS, MS (Cardiovascular and Thoracic Surgery)',
+                email: 'j.doe@example.com',
+                phone: '(555) 987-6543',
+                about: 'Prof. Dr. Abul Kalm Shamsuddin is a compassionate pediatrician...',
+                image: 'doctor3.jpg'
+            },
+            {
+                name: 'Dr. Abul Kalm ',
+                specialization: 'Heart Surgery Specialist',
+                experience: 10,
+                education: 'MBBS, MS (Cardiothoracic Surgery)',
+                email: 'j.doe@example.com',
+                phone: '(555) 987-6543',
+                about: 'Dr. Abul Kalm  is a compassionate pediatrician...',
+                image: 'doctor4.jpg'
+            },
+            {
+                name: 'Dr. Samir Kumar Biswas',
+                specialization: 'Cardiothoracic Surgery',
+                experience: 9,
+                education: 'MBBS, MS (Cardiothoracic Surgery)',
+                email: 'j.doe@example.com',
+                phone: '(555) 987-6543',
+                about: 'Dr. Samir Kumar Biswas is a compassionate pediatrician...',
+                image: 'doctor5.jpg'
+            },
+           
+        ];
+    </script>
+</body>
+</html>
